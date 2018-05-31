@@ -5,6 +5,7 @@ module ActiveElasticJob
     config.active_elastic_job.process_jobs = !process_active_elastic_jobs.nil? && process_active_elastic_jobs.downcase == 'true'
     config.active_elastic_job.aws_credentials = lambda { Aws::InstanceProfileCredentials.new }
     config.active_elastic_job.periodic_tasks_route = '/periodic_tasks'.freeze
+    config.active_elastic_job.aws_region = ENV['AWS_REGION']
 
     initializer "active_elastic_job.insert_middleware" do |app|
       if app.config.active_elastic_job.secret_key_base.blank?
